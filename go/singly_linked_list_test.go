@@ -9,7 +9,7 @@ import (
 func TestNewLinkedList(t *testing.T) {
 	ll := NewLinkedList[int]()
 	assert.Equal(t, uintptr(0), ll.Count)
-	assert.Equal(t, nil, ll.Head)
+	assert.Nil(t, ll.Head)
 }
 
 func TestInsertLinkedList(t *testing.T) {
@@ -37,7 +37,7 @@ func TestRemoveLinkedList(t *testing.T) {
 	// remove last
 	ll.RemoveLast()
 	assert.Equal(t, uintptr(2), ll.Count)
-	assert.Equal(t, nil, ll.GetNthNode(2))
+	assert.Nil(t, ll.GetNthNode(2))
 
 	// remove first
 	ll.RemoveFirst()
