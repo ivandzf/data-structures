@@ -45,13 +45,13 @@ impl<T: Debug> LinkedList<T> {
     }
 
     fn insert_last(&mut self, v: T) {
-        let mut new_node = Node::new(v);
-        match self.head {
-            None => {
-                self.head = Some(new_node);
-            }
-            Some(tail) => {}
-        }
+        //let mut new_node = Node::new(v);
+        //match self.head {
+        //    None => {
+        //        self.head = Some(new_node);
+        //    }
+        //    Some(tail) => {}
+        //}
         self.count += 1;
     }
 
