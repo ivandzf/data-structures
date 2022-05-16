@@ -17,4 +17,4 @@ This repo is only for learning the data structures in many languages I have lear
 ## Why ?
 Data structure is a very good example for understanding how a language applies a variable to memory, every language has a different way.
 
-Example: in Rust languange if we want to implement the doubly linked list which takes circular dependency and Rust has an ownership to make memory safety guarantees and disallow you to have an multiple ownership. But in Go language you are free to do that.
+Example: in Rust languange if we want to implement the doubly linked list which takes circular dependency and Rust has an ownership to make memory safety guarantees and disallow you to have a multiple ownership. But in Go language you are free to do that. 
