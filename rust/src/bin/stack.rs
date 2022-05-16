@@ -3,28 +3,28 @@
 fn main() {}
 
 struct Stack<T> {
-    data: Vec<T>,
+    element: Vec<T>,
 }
 
 impl<T> Stack<T> {
-    fn new() -> Stack<T> {
-        Stack { data: Vec::new() }
+    pub fn new() -> Stack<T> {
+        Stack { element: Vec::new() }
     }
 
-    fn push(&mut self, elem: T) {
-        self.data.push(elem);
+    pub fn push(&mut self, elem: T) {
+        self.element.push(elem);
     }
 
-    fn pop(&mut self) -> Option<T> {
-        self.data.pop()
+    pub fn pop(&mut self) -> Option<T> {
+        self.element.pop()
     }
 
-    fn peek(&self) -> Option<&T> {
-        self.data.last()
+    pub fn peek(&self) -> Option<&T> {
+        self.element.last()
     }
 
-    fn size(&self) -> usize {
-        self.data.len()
+    pub fn size(&self) -> usize {
+        self.element.len()
     }
 }
 
