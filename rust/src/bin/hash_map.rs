@@ -20,7 +20,7 @@ fn main() {}
 
 #[cfg(test)]
 mod tests {
-    // use native map from golang, to complicated if we want to implement our own
+    // use native map from rust, to complicated if we want to implement our own
     use std::collections::HashMap;
 
     #[test]
