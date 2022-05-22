@@ -45,10 +45,8 @@ func (g *Graph[T]) RemoveEdge(vertex1 *Vertex[T], vertex2 *Vertex[T]) {
 			g.Edges[vertex1] = append(g.Edges[vertex1][:i], g.Edges[vertex1][i+1:]...)
 		}
 
-		println(g.Edges[vertex1])
-
 		if len(g.Edges[vertex1]) == 0 {
-			g.Edges[vertex1] = nil
+			delete(g.Edges, vertex1)
 		}
 	}
 }
