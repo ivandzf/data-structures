@@ -47,7 +47,8 @@ mod test {
     fn enqueue() {
         let mut q: Queue<i32> = Queue::new();
         q.enqueue(1);
-        assert_eq!(q.size(), 1);
+        q.enqueue(2);
+        assert_eq!(q.size(), 2);
     }
 
     #[test]
