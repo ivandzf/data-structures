@@ -8,17 +8,18 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-type binaryNode[T any] struct {
+type binaryNode[T comparable] struct {
 	Element T
+	HashedElement HashKey
 	Left    *binaryNode[T]
 	Right   *binaryNode[T]
 }
 
-type BinaryRoot[T any] struct {
+type BinaryRoot[T comparable] struct {
 	Root *binaryNode[T]
 }
 
-func NewTree[T any]() BinaryRoot[T] {
+func NewTree[T comparable]() BinaryRoot[T] {
 	return BinaryRoot[T]{}
 }
 
@@ -52,10 +53,11 @@ func (t *binaryNode[T]) hashInsert(element T) {
 		log.Panicf("failed to hash the key %v, error: %v", element, err)
 	}
 
-	if hashedElement.LessThan(t.Element) {
+	if hashedElement.LessThan(t.HashedElement) {
 		if t.Left == nil {
 			t.Left = &binaryNode[T]{
 				Element: element,
+				HashedElement: hashedElement,
 			}
 		} else {
 			t.Left.hashInsert(element)
@@ -64,6 +66,7 @@ func (t *binaryNode[T]) hashInsert(element T) {
 		if t.Right == nil {
 			t.Right = &binaryNode[T]{
 				Element: element,
+				HashedElement: hashedElement,
 			}
 		} else {
 			t.Right.hashInsert(element)
@@ -83,4 +86,33 @@ func (t *binaryNode[T]) print(w io.Writer, tab int, ch string) {
 	fmt.Fprintf(w, "%s: %+v\n", ch, t.Element)
 	t.Left.print(w, tab+2, "left")
 	t.Right.print(w, tab+2, "right")
+}
+
+func (t *BinaryRoot[T]) Find(element T) *binaryNode[T] {
+	if t == nil {
+		return nil
+	}
+
+	return t.Root.find(element)
+}
+
+func (t *binaryNode[T]) find(element T) *binaryNode[T] {
+	if t == nil {
+		return nil
+	}
+
+	hashedElement, err := NewHashKey(element)
+	if err != nil {
+		log.Panicf("failed to hash the key %v, error: %v", element, err)
+	}
+
+	if t.Element == element {
+		return t
+	}
+
+	if hashedElement.LessThan(t.HashedElement) {
+		return t.Left.find(element)
+	} else {
+		return t.Right.find(element)
+	}
 }
